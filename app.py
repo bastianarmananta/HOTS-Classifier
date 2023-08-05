@@ -31,7 +31,7 @@ def main():
     st.sidebar.title('HOTS Classifier')
     st.sidebar.image(image_icon)
     choice = st.sidebar.selectbox('Main Menu', ["Profil", 'Beranda', 'Tentang'])
-    st.sidebar.info('Web ini dapat melakukan fungsi klasifikasi teks menggunakan target HOTS dan LOTS.')
+    st.sidebar.info('Web ini dapat melakukan fungsi klasifikasi teks ke dalam kategori HOTS dan LOTS.')
 
     if choice == 'Profil':
         st.title("Nama : Hida Syifaurohmah")

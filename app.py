@@ -30,17 +30,17 @@ def main():
 
     st.sidebar.title('HOTS Classifier')
     st.sidebar.image(image_icon)
-    choice = st.sidebar.selectbox('Main Menu', ["Profile", 'Home', 'About'])
+    choice = st.sidebar.selectbox('Main Menu', ["Profil", 'Beranda', 'Tentang'])
     st.sidebar.info('Web ini dapat melakukan fungsi klasifikasi teks menggunakan target HOTS dan LOTS.')
 
-    if choice == 'Profile':
+    if choice == 'Profil':
         st.title("Nama : Hida Syifaurohmah")
         st.title("NIM")
         st.title("etc")
 
-    if choice == 'Home':
-        st.title("Klasifikasikan teks anda disini!")
-        st.comment("Selain menggunakan prediksi pada sampel teks, anda juga dapat menggunakan teks lain untuk diprediksi")
+    if choice == 'Beranda':
+        st.header("Klasifikasikan teks anda disini!")
+        st.subheader("Selain menggunakan prediksi pada sampel teks, anda juga dapat menggunakan teks lain untuk diprediksi.")
         sample_text = load_sample_text()
         selected_text = st.radio('Pilih sampel teks:', sample_text, key='sample_text')
 
@@ -66,7 +66,7 @@ def main():
             else:
                 st.warning("Silahkan input teks pada form untuk melakukan klasifikasi!")
 
-    elif choice == 'About':
+    elif choice == 'Tentang':
         st.title('About')
         st.markdown("---")
         st.header('Klasifikasi teks : HOTS and LOTS')

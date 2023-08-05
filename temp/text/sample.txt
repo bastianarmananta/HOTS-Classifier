@@ -1,3 +1,2 @@
 Hub merupakan komponen vsat pada bagian
-Pusat pengaturan lalulintas data dalam vsat dinamakan dengan
 Topologi jaringan vsat yang memiliki hub sebagai pusat dari jaringan adalah

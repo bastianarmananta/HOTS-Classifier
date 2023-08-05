@@ -4,8 +4,8 @@ from PIL import Image
 
 @st.cache_data()
 def load_pickled_objects():
-    pickled_vector = pickle.load(open('temp/model/word_vector.pkl', 'rb'))
-    pickled_model = pickle.load(open('temp/model/model.pkl', 'rb'))
+    pickled_vector = pickle.load(open('temp/model/vector_newDataset.pkl', 'rb'))
+    pickled_model = pickle.load(open('temp/model/model_newDataset.pkl', 'rb'))
     return pickled_vector, pickled_model
 
 def load_sample_text():
@@ -30,8 +30,13 @@ def main():
 
     st.sidebar.title('HOTS Classifier')
     st.sidebar.image(image_icon)
-    choice = st.sidebar.selectbox('Main Menu', ['Home', 'About'])
-    st.sidebar.info('This web app enables text classification into HOTS, MOTS, and LOTS categories.')
+    choice = st.sidebar.selectbox('Main Menu', ["Profile", 'Home', 'About'])
+    st.sidebar.info('This web app will text classification into HOTS, and LOTS categories.')
+
+    if choice == 'Profile':
+        st.title("Name")
+        st.title("NIM")
+        st.title("etc")
 
     if choice == 'Home':
         st.title("Classify your text!")
@@ -63,11 +68,11 @@ def main():
     elif choice == 'About':
         st.title('About')
         st.markdown("---")
-        st.header('Text Classification: HOTS, MOTS, and LOTS')
-        st.markdown("The Text Classification project aims to classify text into three classes: HOTS (Highly Occurring Text Sequences), MOTS (Moderately Occurring Text Sequences), and LOTS (Low Occurring Text Sequences). The goal is to accurately categorize text based on their occurrence frequency. The project utilizes two classification algorithms: Decision Tree Classifier and K-Nearest Neighbors (KNN), and applies TF-IDF (Term Frequency-Inverse Document Frequency) as a preprocessing technique.")
+        st.header('Text Classification: HOTS and LOTS')
+        st.markdown("The Text Classification project aims to classify text into three classes: HOTS (Highly Occurring Text Sequences) and LOTS (Low Occurring Text Sequences). The goal is to accurately categorize text based on their occurrence frequency. The project utilizes two classification algorithms: Decision Tree Classifier and K-Nearest Neighbors (KNN), and applies TF-IDF (Term Frequency-Inverse Document Frequency) as a preprocessing technique.")
         st.markdown("")
         st.header('Features')
-        st.markdown("- Classify text into three categories: HOTS, MOTS, and LOTS based on their occurrence frequency.")
+        st.markdown("- Classify text into three categories: HOTS,  and LOTS based on their occurrence frequency.")
         st.markdown("- Utilize Decision Tree Classifier and KNN algorithms for classification.")
         st.markdown("- Apply TF-IDF as a preprocessing technique to represent text data.")
         st.markdown("- Explore hyperparameter tuning to optimize the classification models.")
@@ -83,12 +88,7 @@ def predict_text(text, vectorizer, model):
     vectorized_text = vectorizer.transform(sentence)
     predict = model.predict(vectorized_text)
 
-    if predict == 1:
-        st.info('Text classified as LOTS')
-    elif predict == 2:
-        st.info('Text classified as MOTS')
-    else:
-        st.info('Text classified as HOTS')
+    st.info(f'Text predicted as {predict}')
 
 if __name__ == '__main__':
     main()

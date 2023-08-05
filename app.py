@@ -34,7 +34,7 @@ def main():
     st.sidebar.info('This web app will text classification into HOTS, and LOTS categories.')
 
     if choice == 'Profile':
-        st.title("Name")
+        st.title("Name : Hida Syifaurohmah")
         st.title("NIM")
         st.title("etc")
 

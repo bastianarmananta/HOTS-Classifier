@@ -31,17 +31,18 @@ def main():
     st.sidebar.title('HOTS Classifier')
     st.sidebar.image(image_icon)
     choice = st.sidebar.selectbox('Main Menu', ["Profile", 'Home', 'About'])
-    st.sidebar.info('This web app will text classification into HOTS, and LOTS categories.')
+    st.sidebar.info('Web ini dapat melakukan fungsi klasifikasi teks menggunakan target HOTS dan LOTS.')
 
     if choice == 'Profile':
-        st.title("Name : Hida Syifaurohmah")
+        st.title("Nama : Hida Syifaurohmah")
         st.title("NIM")
         st.title("etc")
 
     if choice == 'Home':
-        st.title("Classify your text!")
+        st.title("Klasifikasikan teks anda disini!")
+        st.comment("Selain menggunakan prediksi pada sampel teks, anda juga dapat menggunakan teks lain untuk diprediksi")
         sample_text = load_sample_text()
-        selected_text = st.radio('Select a sample text:', sample_text, key='sample_text')
+        selected_text = st.radio('Pilih sampel teks:', sample_text, key='sample_text')
 
         if selected_text != session_state.selected_text:
             session_state.selected_text = selected_text
@@ -63,32 +64,32 @@ def main():
                 pickled_vector, pickled_model = load_pickled_objects()
                 predict_text(text_input, pickled_vector, pickled_model)
             else:
-                st.warning("Please input your text to classify")
+                st.warning("Silahkan input teks pada form untuk melakukan klasifikasi!")
 
     elif choice == 'About':
         st.title('About')
         st.markdown("---")
-        st.header('Text Classification: HOTS and LOTS')
-        st.markdown("The Text Classification project aims to classify text into three classes: HOTS (Highly Occurring Text Sequences) and LOTS (Low Occurring Text Sequences). The goal is to accurately categorize text based on their occurrence frequency. The project utilizes two classification algorithms: Decision Tree Classifier and K-Nearest Neighbors (KNN), and applies TF-IDF (Term Frequency-Inverse Document Frequency) as a preprocessing technique.")
+        st.header('Klasifikasi teks : HOTS and LOTS')
+        st.markdown("Proyek Klasifikasi Teks bertujuan untuk mengklasifikasikan teks ke dalam dua kelas: HOTS (Sekuensi Teks yang Sering Muncul) dan LOTS (Sekuensi Teks yang Jarang Muncul). Tujuannya adalah untuk mengategorikan teks secara akurat berdasarkan frekuensi kejadian mereka. Proyek ini menggunakan dua algoritma klasifikasi: Pohon Keputusan (Decision Tree Classifier) dan Tetangga Terdekat K (K-Nearest Neighbors atau KNN), dan menerapkan teknik pra pemrosesan TF-IDF (Term Frequency-Inverse Document Frequency).")
         st.markdown("")
-        st.header('Features')
-        st.markdown("- Classify text into three categories: HOTS,  and LOTS based on their occurrence frequency.")
-        st.markdown("- Utilize Decision Tree Classifier and KNN algorithms for classification.")
-        st.markdown("- Apply TF-IDF as a preprocessing technique to represent text data.")
-        st.markdown("- Explore hyperparameter tuning to optimize the classification models.")
+        st.header('Fitur')
+        st.markdown("- Mengklasifikasikan teks ke dalam dua kategori: HOTS dan LOTS berdasarkan frekuensi kejadian mereka.")
+        st.markdown("- Menggunakan algoritma Decision Tree Classifier dan KNN untuk klasifikasi.")
+        st.markdown("- Menerapkan TF-IDF sebagai teknik pra pemrosesan untuk merepresentasikan data teks.")
+        st.markdown("- Mengeksplorasi penyetelan hiperparameter untuk mengoptimalkan model klasifikasi.")
         st.markdown("")
-        st.header('Model Development')
-        st.markdown("The project involves the development of two classification models: Decision Tree Classifier and KNN.")
-        st.markdown("- Decision Tree Classifier: This model builds a decision tree based on the features derived from the TF-IDF representation of the text data. It splits the data based on the occurrence frequency of text sequences to classify them into the respective classes.")
-        st.markdown("- K-Nearest Neighbors (KNN): This model utilizes the TF-IDF representation to measure the similarity between the input text and the training instances. It classifies the text by considering the k nearest neighbors in the training data.")
-        st.markdown("Both models undergo hyperparameter exploration to find the optimal values for parameters such as maximum depth, criterion, number of neighbors, and distance metric.")
+        st.header('Pengembangan Model')
+        st.markdown("Proyek ini melibatkan pengembangan dua model klasifikasi: Decision Tree Classifier dan KNN.")
+        st.markdown("- Decision Tree Classifier: Model ini membangun sebuah pohon keputusan berdasarkan fitur-fitur yang diambil dari representasi TF-IDF data teks. Ia membagi data berdasarkan frekuensi kejadian dari sekuensi teks untuk mengklasifikasikannya ke dalam kelas-kelas yang sesuai.")
+        st.markdown("- K-Nearest Neighbors (KNN): Model ini menggunakan representasi TF-IDF untuk mengukur kesamaan antara teks input dan contoh-contoh pelatihan. Ia mengklasifikasikan teks dengan mempertimbangkan k tetangga terdekat dalam data pelatihan.")
+        st.markdown("Kedua model ini menjalani eksplorasi hiperparameter untuk mencari nilai optimal untuk parameter-parameter seperti kedalaman maksimum, kriteria, jumlah tetangga, dan metrik jarak.")
 
 def predict_text(text, vectorizer, model):
     sentence = [text]
     vectorized_text = vectorizer.transform(sentence)
     predict = model.predict(vectorized_text)
 
-    st.info(f'Text predicted as {predict}')
+    st.info(f'Teks diprediksi sebagai {predict}')
 
 if __name__ == '__main__':
     main()

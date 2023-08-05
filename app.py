@@ -28,7 +28,7 @@ def main():
         page_icon=image_icon
     )
 
-    st.sidebar.title('HOTS Classifier')
+    st.sidebar.title('Klasifikasi Teks HOTS dan LOTS')
     st.sidebar.image(image_icon)
     choice = st.sidebar.selectbox('Main Menu', ["Profil", 'Beranda', 'Tentang'])
     st.sidebar.info('Web ini dapat melakukan fungsi klasifikasi teks ke dalam kategori HOTS dan LOTS.')

@@ -1,17 +1,13 @@
 import pickle
 import streamlit as st
+import os
 from PIL import Image
 
 @st.cache_data()
 def load_pickled_objects():
-    pickled_vector = pickle.load(open('temp/model/vector_newDataset.pkl', 'rb'))
-    pickled_model = pickle.load(open('temp/model/model_newDataset.pkl', 'rb'))
+    pickled_vector = pickle.load(open('temp/model/word_vectorKNN.pkl', 'rb'))
+    pickled_model = pickle.load(open('temp/model/modelKNN.pkl', 'rb'))
     return pickled_vector, pickled_model
-
-def load_sample_text():
-    with open('temp/text/sample.txt', 'r') as file:
-        sample_text = file.readlines()
-    return [text.strip() for text in sample_text]
 
 def main():
     session_state = st.session_state
@@ -28,25 +24,39 @@ def main():
         page_icon=image_icon
     )
 
-    st.sidebar.title('Klasifikasi Teks HOTS dan LOTS')
+    st.sidebar.title('Klasifikasi Soal HOTS dan LOTS')
     st.sidebar.image(image_icon)
     choice = st.sidebar.selectbox('Main Menu', ["Profil", 'Beranda', 'Tentang'])
     st.sidebar.info('Web ini dapat melakukan fungsi klasifikasi teks ke dalam kategori HOTS dan LOTS.')
 
     if choice == 'Profil':
-        st.title("Nama : Hida Syifaurohmah")
-        st.title("NIM")
-        st.title("etc")
+        
+        col1, col2, col3 = st.columns(3)
+        
+        
+        # Path gambar
+        image_path = 'temp/icon/Logo UNY.png'
+
+        # Ukuran baru untuk gambar (misal: 300x300 piksel)
+        new_image_width = 300
+
+        with col2:
+            # Menampilkan gambar dengan ukuran yang berbeda
+            st.image(image_path, width=new_image_width)
+        with st.container():
+            st.markdown('<center><h1>ANALISIS PERBANDINGAN KLASIFIKASI SOAL BERDASARKAN LEVEL KOGNITTIF MENGGUNAKAN METODE DECISION TREE DAN K-NEAREST NEIGHBOORS</h1></center>', unsafe_allow_html=True)
+            st.header("Nama : Hida Syifaurohmah")
+            st.header("NIM : 21520251040")
+            st.header("Pembimbing : Dr. Ir. Fatchul Arifin, M.T")
+        
+        st.markdown('<center><h1>PENDIDIKAN TEKNIK ELEKTRONIKA DAN INFORMATIKA</h1></center>', unsafe_allow_html=True)
+        st.markdown('<center><h1>PROGRAM PASCA SARJANA</h1></center>', unsafe_allow_html=True)
+        st.markdown('<center><h1>UNIVERSITAS NEGERI YOGYAKARTA</h1></center>', unsafe_allow_html=True)
+        st.markdown('<center><h1>2023</h1></center>', unsafe_allow_html=True)
+
 
     if choice == 'Beranda':
         st.header("Klasifikasikan teks anda disini!")
-        st.subheader("Selain menggunakan prediksi pada sampel teks, anda juga dapat menggunakan teks lain untuk diprediksi.")
-        sample_text = load_sample_text()
-        selected_text = st.radio('Pilih sampel teks:', sample_text, key='sample_text')
-
-        if selected_text != session_state.selected_text:
-            session_state.selected_text = selected_text
-            session_state.predict_button_clicked = True
 
         text_input = st.text_input(
             label="Input text here",
@@ -70,7 +80,7 @@ def main():
         st.title('About')
         st.markdown("---")
         st.header('Klasifikasi teks : HOTS and LOTS')
-        st.markdown("Proyek Klasifikasi Teks bertujuan untuk mengklasifikasikan teks ke dalam dua kelas: HOTS (Sekuensi Teks yang Sering Muncul) dan LOTS (Sekuensi Teks yang Jarang Muncul). Tujuannya adalah untuk mengategorikan teks secara akurat berdasarkan frekuensi kejadian mereka. Proyek ini menggunakan dua algoritma klasifikasi: Pohon Keputusan (Decision Tree Classifier) dan Tetangga Terdekat K (K-Nearest Neighbors atau KNN), dan menerapkan teknik pra pemrosesan TF-IDF (Term Frequency-Inverse Document Frequency).")
+        st.markdown("Proyek Klasifikasi Teks bertujuan untuk mengklasifikasikan teks ke dalam dua kelas: HOTS (Higher Order Thinking Skills) dan LOTS (Lower Order Thinking Skills). Tujuannya adalah untuk mengategorikan teks secara akurat berdasarkan frekuensi kejadian mereka. Proyek ini menggunakan dua algoritma klasifikasi: Pohon Keputusan (Decision Tree Classifier) dan Tetangga Terdekat K (K-Nearest Neighbors atau KNN), dan menerapkan teknik pra pemrosesan TF-IDF (Term Frequency-Inverse Document Frequency).")
         st.markdown("")
         st.header('Fitur')
         st.markdown("- Mengklasifikasikan teks ke dalam dua kategori: HOTS dan LOTS berdasarkan frekuensi kejadian mereka.")
@@ -88,8 +98,11 @@ def predict_text(text, vectorizer, model):
     sentence = [text]
     vectorized_text = vectorizer.transform(sentence)
     predict = model.predict(vectorized_text)
+    
+    # Get the first element (predicted class) from the numpy array
+    predicted_class = predict[0]
 
-    st.info(f'Teks diprediksi sebagai {predict}')
+    st.info(f'Teks diprediksi sebagai {predicted_class}.')
 
 if __name__ == '__main__':
     main()

@@ -26,33 +26,32 @@ def main():
 
     st.sidebar.title('Klasifikasi Soal HOTS dan LOTS')
     st.sidebar.image(image_icon)
-    choice = st.sidebar.selectbox('Main Menu', ["Profil", 'Beranda', 'Tentang'])
+    choice = st.sidebar.selectbox('Main Menu', ['Beranda', 'Tentang'])
     st.sidebar.info('Web ini dapat melakukan fungsi klasifikasi teks ke dalam kategori HOTS dan LOTS.')
 
-    if choice == 'Profil':
+    # if choice == 'Profil':
         
-        col1, col2, col3 = st.columns(3)
+    #     col1, col2, col3 = st.columns(3)
         
-        
-        # Path gambar
-        image_path = 'temp/icon/Logo UNY.png'
+    #     # Path gambar
+    #     image_path = 'temp/icon/Logo UNY.png'
 
-        # Ukuran baru untuk gambar (misal: 300x300 piksel)
-        new_image_width = 300
+    #     # Ukuran baru untuk gambar (misal: 300x300 piksel)
+    #     new_image_width = 300
 
-        with col2:
-            # Menampilkan gambar dengan ukuran yang berbeda
-            st.image(image_path, width=new_image_width)
-        with st.container():
-            st.markdown('<center><h1>ANALISIS PERBANDINGAN KLASIFIKASI SOAL BERDASARKAN LEVEL KOGNITTIF MENGGUNAKAN METODE DECISION TREE DAN K-NEAREST NEIGHBOORS</h1></center>', unsafe_allow_html=True)
-            st.header("Nama : Hida Syifaurohmah")
-            st.header("NIM : 21520251040")
-            st.header("Pembimbing : Dr. Ir. Fatchul Arifin, M.T")
+    #     with col2:
+    #         # Menampilkan gambar dengan ukuran yang berbeda
+    #         st.image(image_path, width=new_image_width)
+    #     with st.container():
+    #         st.markdown('<center><h1>ANALISIS PERBANDINGAN KLASIFIKASI SOAL BERDASARKAN LEVEL KOGNITTIF MENGGUNAKAN METODE DECISION TREE DAN K-NEAREST NEIGHBOORS</h1></center>', unsafe_allow_html=True)
+    #         st.header("Nama : Hida Syifaurohmah")
+    #         st.header("NIM : 21520251040")
+    #         st.header("Pembimbing : Dr. Ir. Fatchul Arifin, M.T")
         
-        st.markdown('<center><h1>PENDIDIKAN TEKNIK ELEKTRONIKA DAN INFORMATIKA</h1></center>', unsafe_allow_html=True)
-        st.markdown('<center><h1>PROGRAM PASCA SARJANA</h1></center>', unsafe_allow_html=True)
-        st.markdown('<center><h1>UNIVERSITAS NEGERI YOGYAKARTA</h1></center>', unsafe_allow_html=True)
-        st.markdown('<center><h1>2023</h1></center>', unsafe_allow_html=True)
+    #     st.markdown('<center><h1>PENDIDIKAN TEKNIK ELEKTRONIKA DAN INFORMATIKA</h1></center>', unsafe_allow_html=True)
+    #     st.markdown('<center><h1>PROGRAM PASCA SARJANA</h1></center>', unsafe_allow_html=True)
+    #     st.markdown('<center><h1>UNIVERSITAS NEGERI YOGYAKARTA</h1></center>', unsafe_allow_html=True)
+    #     st.markdown('<center><h1>2023</h1></center>', unsafe_allow_html=True)
 
 
     if choice == 'Beranda':

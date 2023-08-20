@@ -1,12 +1,12 @@
 import pickle
 import streamlit as st
-import os
+import random
 from PIL import Image
 
 @st.cache_data()
 def load_pickled_objects():
-    pickled_vector = pickle.load(open('temp/model/word_vectorKNN.pkl', 'rb'))
-    pickled_model = pickle.load(open('temp/model/modelKNN.pkl', 'rb'))
+    pickled_vector = pickle.load(open('temp/model/word_vectorDTC90%.pkl', 'rb'))
+    pickled_model = pickle.load(open('temp/model/modelDTC90%.pkl', 'rb'))
     return pickled_vector, pickled_model
 
 def main():
@@ -76,32 +76,55 @@ def main():
                 st.warning("Silahkan input teks pada form untuk melakukan klasifikasi!")
 
     elif choice == 'Tentang':
-        st.title('About')
+        st.title('Tentang')
         st.markdown("---")
-        st.header('Klasifikasi teks : HOTS and LOTS')
-        st.markdown("Proyek Klasifikasi Teks bertujuan untuk mengklasifikasikan teks ke dalam dua kelas: HOTS (Higher Order Thinking Skills) dan LOTS (Lower Order Thinking Skills). Tujuannya adalah untuk mengategorikan teks secara akurat berdasarkan frekuensi kejadian mereka. Proyek ini menggunakan dua algoritma klasifikasi: Pohon Keputusan (Decision Tree Classifier) dan Tetangga Terdekat K (K-Nearest Neighbors atau KNN), dan menerapkan teknik pra pemrosesan TF-IDF (Term Frequency-Inverse Document Frequency).")
-        st.markdown("")
-        st.header('Fitur')
-        st.markdown("- Mengklasifikasikan teks ke dalam dua kategori: HOTS dan LOTS berdasarkan frekuensi kejadian mereka.")
-        st.markdown("- Menggunakan algoritma Decision Tree Classifier dan KNN untuk klasifikasi.")
-        st.markdown("- Menerapkan TF-IDF sebagai teknik pra pemrosesan untuk merepresentasikan data teks.")
-        st.markdown("- Mengeksplorasi penyetelan hiperparameter untuk mengoptimalkan model klasifikasi.")
-        st.markdown("")
-        st.header('Pengembangan Model')
-        st.markdown("Proyek ini melibatkan pengembangan dua model klasifikasi: Decision Tree Classifier dan KNN.")
-        st.markdown("- Decision Tree Classifier: Model ini membangun sebuah pohon keputusan berdasarkan fitur-fitur yang diambil dari representasi TF-IDF data teks. Ia membagi data berdasarkan frekuensi kejadian dari sekuensi teks untuk mengklasifikasikannya ke dalam kelas-kelas yang sesuai.")
-        st.markdown("- K-Nearest Neighbors (KNN): Model ini menggunakan representasi TF-IDF untuk mengukur kesamaan antara teks input dan contoh-contoh pelatihan. Ia mengklasifikasikan teks dengan mempertimbangkan k tetangga terdekat dalam data pelatihan.")
-        st.markdown("Kedua model ini menjalani eksplorasi hiperparameter untuk mencari nilai optimal untuk parameter-parameter seperti kedalaman maksimum, kriteria, jumlah tetangga, dan metrik jarak.")
+        with st.expander("Aplikasi"):
+            st.markdown("""K-Bloom merupakan aplikasi untuk mengklasifikasikan soal berdasarkan level kognitif taksonomi
+                        bloom ke dalam dua kelas: HOTS (Higher Order Thinking Skills) dan LOTS (Lower Order Thinking Skills). Aplikasi 
+                        ini dikembangkan agar mempermudah guru ataupun calon guru memprediksi kategori soal yang akan digunakan 
+                        untuk mengukur pengetahuan peserta didik tentang materi yang bersangkutan.""")
+            
+        with st.expander("Panduan Penggunaan"):
+            st.markdown("1. Masuk ke halaman beranda.")
+            st.markdown("2.	Masukan soal dalam bentuk teks berbahasa indonesia.")
+            st.markdown("3.	Klik tombol predict.")
+            st.markdown("4.	Akan tampil hasil klasifikasi soal berdasarkan level kognitif.")
+            
+        with st.expander("Metode"):
+            st.markdown("""Decision Tree Classifier adalah algoritma pembelajaran mesin yang umumnya digunakan untuk tugas klasifikasi dan regresi. 
+                        Algoritma ini bekerja dengan membagi data masukan 
+                        secara berulang-ulang menjadi subset berdasarkan nilai fitur-fitur masukan. 
+                        Partisi ini direpresentasikan dalam bentuk struktur berupa pohon, di mana setiap simpul internal mewakili suatu keputusan berdasarkan fitur tertentu
+                        , dan setiap simpul daun mewakili label kelas (untuk klasifikasi) atau prediksi (untuk regresi).""")
+        
+        with st.expander("Fitur"):
+            st.markdown("- Mengklasifikasikan teks ke dalam dua kategori: HOTS dan LOTS berdasarkan data masukan pengguna.")
+            st.markdown("- Menggunakan algoritma Decision Tree Classifier.")
+            st.markdown("- Menerapkan TF-IDF sebagai teknik preprocessing untuk merepresentasikan data teks.")
+            st.markdown("- Mengeksplorasi tunning hyperparameter untuk mengoptimalkan model klasifikasi.")
+
 
 def predict_text(text, vectorizer, model):
+    
+    lots_suggest = [
+        'Sebaiknya soal mengandung kemampuan atau keterampilan membedakan, mengorganisasikan, dan menghubungkan. Kata kerja operasional yang biasa digunakan adalah membandingkan, mengkritisi, mengurutkan, membedakan, dan menentukan.',
+        'Sebaiknya soal mengandung kata kerja operasional yang digunakan yaitu mengevaluasi, memilih, menilai, menyanggah, dan memberikan pendapat.', 
+        'Sebaiknya soal mengandung kemampuan dalam merancang, membangun, merencanakan, memproduksi,  menemukan, dan menyempurnakan. Kata kerja operasional yang digunakan adalah memperjelas, menafsirkan, dan memprediksi.'
+    ]
+    
     sentence = [text]
     vectorized_text = vectorizer.transform(sentence)
     predict = model.predict(vectorized_text)
     
     # Get the first element (predicted class) from the numpy array
     predicted_class = predict[0]
-
-    st.info(f'Teks diprediksi sebagai {predicted_class}.')
+    
+    if predicted_class == 'Lower Order Thinking Skills':
+        random_suggestion = random.choice(lots_suggest)
+        st.info(f'Teks diprediksi sebagai {predicted_class}.')
+        st.info(f'Saran : {random_suggestion}')
+    else:
+        st.info(f'Teks diprediksi sebagai {predicted_class}.')
 
 if __name__ == '__main__':
     main()

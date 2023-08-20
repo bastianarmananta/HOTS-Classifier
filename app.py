@@ -101,7 +101,7 @@ def main():
             st.markdown("- Mengklasifikasikan teks ke dalam dua kategori: HOTS dan LOTS berdasarkan data masukan pengguna.")
             st.markdown("- Menggunakan algoritma Decision Tree Classifier.")
             st.markdown("- Menerapkan TF-IDF sebagai teknik preprocessing untuk merepresentasikan data teks.")
-            st.markdown("- Mengeksplorasi tunning hyperparameter untuk mengoptimalkan model klasifikasi.")
+            st.markdown("- Mengeksplorasi hyperparameter untuk mengoptimalkan model klasifikasi.")
 
 
 def predict_text(text, vectorizer, model):

@@ -57,7 +57,7 @@ def main():
     if choice == 'Beranda':
         st.header("Klasifikasikan teks anda disini!")
 
-        text_input = st.text_input(
+        text_input = st.text_area(
             label="Input text here",
             placeholder="Pusat pengaturan lalulintas data dalam vsat dinamakan dengan",
             label_visibility='hidden',
@@ -79,25 +79,29 @@ def main():
         st.title('Tentang')
         st.markdown("---")
         with st.expander("Aplikasi"):
+            st.markdown("<h1 style='font-weight:bold;font-size:24px;'>Aplikasi</h1>", unsafe_allow_html=True)
             st.markdown("""K-Bloom merupakan aplikasi untuk mengklasifikasikan soal berdasarkan level kognitif taksonomi
                         bloom ke dalam dua kelas: HOTS (Higher Order Thinking Skills) dan LOTS (Lower Order Thinking Skills). Aplikasi 
                         ini dikembangkan agar mempermudah guru ataupun calon guru memprediksi kategori soal yang akan digunakan 
                         untuk mengukur pengetahuan peserta didik tentang materi yang bersangkutan.""")
             
         with st.expander("Panduan Penggunaan"):
+            st.markdown("<h1 style='font-weight:bold;font-size:24px;'>Panduan Penggunaan</h1>", unsafe_allow_html=True)
             st.markdown("1. Masuk ke halaman beranda.")
             st.markdown("2.	Masukan soal dalam bentuk teks berbahasa indonesia.")
             st.markdown("3.	Klik tombol predict.")
             st.markdown("4.	Akan tampil hasil klasifikasi soal berdasarkan level kognitif.")
             
         with st.expander("Metode"):
-            st.markdown("""Decision Tree Classifier adalah algoritma pembelajaran mesin yang umumnya digunakan untuk tugas klasifikasi dan regresi. 
+            st.markdown("<h1 style='font-weight:bold;font-size:24px;'>Metode</h1>", unsafe_allow_html=True)
+            st.markdown("""Aplikasi ini menggunakan Decision Tree Classifier yang merupakan algoritma pembelajaran mesin yang umumnya digunakan untuk tugas klasifikasi dan regresi. 
                         Algoritma ini bekerja dengan membagi data masukan 
                         secara berulang-ulang menjadi subset berdasarkan nilai fitur-fitur masukan. 
                         Partisi ini direpresentasikan dalam bentuk struktur berupa pohon, di mana setiap simpul internal mewakili suatu keputusan berdasarkan fitur tertentu
                         , dan setiap simpul daun mewakili label kelas (untuk klasifikasi) atau prediksi (untuk regresi).""")
         
         with st.expander("Fitur"):
+            st.markdown("<h1 style='font-weight:bold;font-size:24px;'>Fitur</h1>", unsafe_allow_html=True)
             st.markdown("- Mengklasifikasikan teks ke dalam dua kategori: HOTS dan LOTS berdasarkan data masukan pengguna.")
             st.markdown("- Menggunakan algoritma Decision Tree Classifier.")
             st.markdown("- Menerapkan TF-IDF sebagai teknik preprocessing untuk merepresentasikan data teks.")

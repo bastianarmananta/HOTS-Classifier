@@ -5,8 +5,8 @@ from PIL import Image
 
 @st.cache_data()
 def load_pickled_objects():
-    pickled_vector = pickle.load(open('temp/model/word_vectorDTC90%.pkl', 'rb'))
-    pickled_model = pickle.load(open('temp/model/modelDTC90%.pkl', 'rb'))
+    pickled_vector = pickle.load(open('temp/model/bestModelKNNSTDEVS0-accTesting87%.pkl', 'rb'))
+    pickled_model = pickle.load(open('temp/model/bestVectorKNNSTDEV.S0-accTesting87%.pkl', 'rb'))
     return pickled_vector, pickled_model
 
 def main():
@@ -72,15 +72,13 @@ def main():
                         untuk mengukur pengetahuan peserta didik tentang materi yang bersangkutan.""")
             
         st.markdown("<h1 style='font-weight:bold;font-size:30px;'>Metode</h1>", unsafe_allow_html=True)
-        st.markdown("""Aplikasi ini menggunakan Decision Tree Classifier yang merupakan algoritma pembelajaran mesin yang umumnya digunakan untuk tugas klasifikasi dan regresi. 
-                    Algoritma ini bekerja dengan membagi data masukan 
-                        secara berulang-ulang menjadi subset berdasarkan nilai fitur-fitur masukan. 
-                        Partisi ini direpresentasikan dalam bentuk struktur berupa pohon, di mana setiap simpul internal mewakili suatu keputusan berdasarkan fitur tertentu
-                        , dan setiap simpul daun mewakili label kelas (untuk klasifikasi) atau prediksi (untuk regresi).""")
+        st.markdown("""Aplikasi ini menggunakan KNearest Neighbor Classifier yang merupakan K-Nearest Neighbors (KNN) adalah salah satu algoritma pembelajaran mesin yang digunakan dalam klasifikasi dan regresi.
+                    Ini adalah metode pembelajaran memungkinkan kita untuk melakukan prediksi berdasarkan kesamaan antara data yang akan diprediksi dengan data pelatihan yang sudah ada. 
+                    Ide dasar di balik KNN adalah bahwa data yang mirip cenderung memiliki label yang mirip.""")
         
         st.markdown("<h1 style='font-weight:bold;font-size:30px;'>Fitur</h1>", unsafe_allow_html=True)
         st.markdown("- Mengklasifikasikan teks ke dalam dua kategori: HOTS dan LOTS berdasarkan data masukan pengguna.")
-        st.markdown("- Menggunakan algoritma Decision Tree Classifier.")
+        st.markdown("- Menggunakan algoritma K-Nearest Neighbors (KNN).")
         st.markdown("- Menerapkan TF-IDF sebagai teknik preprocessing untuk merepresentasikan data teks.")
         st.markdown("- Mengeksplorasi hyperparameter untuk mengoptimalkan model klasifikasi.")
 

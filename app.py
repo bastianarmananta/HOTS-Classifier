@@ -9,6 +9,8 @@ def load_pickled_objects():
     pickled_model = pickle.load(open('temp/model/bestVectorKNNSTDEV.S0-accTesting87%.pkl', 'rb'))
     return pickled_vector, pickled_model
 
+pickled_vector, pickled_model = load_pickled_objects()
+
 def main():
     session_state = st.session_state
     if 'selected_text' not in session_state:
@@ -57,7 +59,6 @@ def main():
             session_state.predict_button_clicked = False
 
             if text_input:
-                vector, model = load_pickled_objects()
                 predict_text(text_input, pickled_vector, pickled_model)
             else:
                 st.warning("Silahkan input teks pada form untuk melakukan klasifikasi!")
@@ -92,8 +93,8 @@ def predict_text(text, vectorizer, model):
     ]
     
     sentence = [text]
-    vectorized_text = vector.transform(sentence)
-    predict = model.predict(vectorized_text)
+    vectorized_text = pickled_vector.transform(sentence)
+    predict = pickled_model.predict(vectorized_text)
     
     # Get the first element (predicted class) from the numpy array
     predicted_class = predict[0]

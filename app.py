@@ -10,9 +10,6 @@ def load_pickled_objects():
     return pickled_vector, pickled_model
 
 def main():
-
-    pickled_vector, pickled_model = load_pickled_objects()
-    
     session_state = st.session_state
     if 'selected_text' not in session_state:
         session_state.selected_text = ""
@@ -60,6 +57,7 @@ def main():
             session_state.predict_button_clicked = False
 
             if text_input:
+                pickled_vector, pickled_model = load_pickled_objects()
                 predict_text(text_input, pickled_vector, pickled_model)
             else:
                 st.warning("Silahkan input teks pada form untuk melakukan klasifikasi!")
@@ -94,8 +92,8 @@ def predict_text(text, vectorizer, model):
     ]
     
     sentence = [text]
-    vectorized_text = pickled_vector.transform(sentence)
-    predict = pickled_model.predict(vectorized_text)
+    vectorized_text = vectorizer.transform(sentence)
+    predict = model.predict(vectorized_text)
     
     # Get the first element (predicted class) from the numpy array
     predicted_class = predict[0]

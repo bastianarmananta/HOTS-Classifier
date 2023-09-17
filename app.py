@@ -92,8 +92,8 @@ def predict_text(text, vectorizer, model):
     ]
     
     sentence = [text]
-    vectorized_text = vectorizer.transform(sentence)
-    predict = model.predict(vectorized_text)
+    vectorized_text = pickled_vector.transform(sentence)
+    predict = pickled_model.predict(vectorized_text)
     
     # Get the first element (predicted class) from the numpy array
     predicted_class = predict[0]

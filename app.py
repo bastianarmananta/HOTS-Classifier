@@ -9,6 +9,8 @@ def load_pickled_objects():
     pickled_model = pickle.load(open('temp/model/bestVectorKNNSTDEV.S0-accTesting87%.pkl', 'rb'))
     return pickled_vector, pickled_model
 
+model = load_pickled_objects()
+
 def main():
     session_state = st.session_state
     if 'selected_text' not in session_state:
